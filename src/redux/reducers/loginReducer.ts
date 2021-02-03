@@ -5,6 +5,7 @@ export type LoginState = {
   password: string;
   helperText: string;
   isError: boolean;
+  showPassword: boolean;
 };
 
 const initialState: LoginState = {
@@ -12,6 +13,7 @@ const initialState: LoginState = {
   password: "",
   helperText: "",
   isError: false,
+  showPassword: false
 };
 
 export const reducer = (state: LoginState = initialState , action: Action): LoginState => {

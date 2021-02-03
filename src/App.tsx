@@ -1,27 +1,18 @@
-import React from "react";
-import { NewNoteInput } from "./components/NewNoteInput";
-import { useSelector, useDispatch } from "react-redux";
-import { NotesState } from "./redux/reducers/noteReducer";
-import { addNote } from "./redux/actions/noteActions";
+import React, { useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
+import Login from "./views/Login/Login";
 
 function App() {
-  const notes = useSelector<NotesState, NotesState["notes"]>(
-    (state) => state.notes
-  );
-  const dispatch = useDispatch();
-  const onAddNote = (note: string) => {
-    dispatch(addNote(note));
-  };
+  useEffect(() => {
+    console.log("hola");
+  });
 
   return (
     <>
-      <NewNoteInput addNote={onAddNote} />
-      <hr />
-      <ul>
-        {notes.map((note) => {
-          return <li key={note}>{note}</li>;
-        })}
-      </ul>
+      <Switch>
+        <Route exact path="/login" component={Login}/>
+      </Switch>
+      <Login />
     </>
   );
 }

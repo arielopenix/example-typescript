@@ -1,11 +1,19 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import logo from "../../assets/img/logo.png";
+import Button from "@material-ui/core/Button";
+import { Grid, Link } from "@material-ui/core";
+import useStyles from "./LoginStyles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 
 const Login = () => {
-  //listens to change event on username textField and dispatches the setUsername action.
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  //Capturo los cambios en el campo email
   const handleEmailChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
@@ -15,7 +23,7 @@ const Login = () => {
     });
   };
 
-  //listens to change event on password textField and dispatches the setPassword action.
+  //Capturo los cambios en el campo password
   const handlePasswordChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
@@ -24,35 +32,70 @@ const Login = () => {
       payload: event.target.value,
     });
   };
+  //onSubmit
+  const onSubmit = () => {};
+  //onRecoverpassword
+  const onRecoverPassword = () => {};
 
   return (
-    <Container className="login" component="main" maxWidth="xs">
-      <img alt="Web Logo" className="logo" src={logo} />
-      <form>
-        <TextField
-          variant="outlined"
-          margin="normal"
-          onChange={handleEmailChange}
-          required
-          fullWidth
-          type="email"
-          id="email"
-          name="email"
-          autoComplete="email"
-          autoFocus
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          onChange={handlePasswordChange}
-          fullWidth
-          name="password"
-          type="password"
-          id="password"
-          autoComplete="current-password"
-        />
-      </form>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Card variant="outlined">
+        <CardContent>
+          <div className={classes.paper}>
+            <img alt="Web Logo" className="logo" src={logo} />
+            <Grid container justify="center" alignItems="center">
+              <Grid item>
+                <hr />
+              </Grid>
+            </Grid>
+            <form className={classes.form} noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                onChange={handleEmailChange}
+                id="email"
+                label="Email"
+                name="email"
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                onChange={handlePasswordChange}
+                id="password"
+                autoComplete="current-password"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={onSubmit}
+              >
+                Ingresar
+              </Button>
+              <Grid container justify="center" alignItems="center">
+                <Grid item>
+                  <p>¿Te olvidaste la contraseña?</p>
+                  <Link href="#" variant="body2" onClick={onRecoverPassword}>
+                    Contactar con el Administrador
+                  </Link>
+                </Grid>
+              </Grid>
+            </form>
+          </div>
+        </CardContent>
+      </Card>
     </Container>
   );
 };
