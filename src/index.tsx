@@ -5,17 +5,11 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import {store} from './redux/store';
-import { Switch, Router, Route } from "react-router-dom";
-import history from './history';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router history={history}>
-        <Switch>
-          <Route path="/" component={App}/>
-        </Switch>
-      </Router>
+      <App/>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

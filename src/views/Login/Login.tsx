@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, MouseEvent} from "react";
 import Container from "@material-ui/core/Container";
 import { useDispatch } from "react-redux";
 import TextField from "@material-ui/core/TextField";
@@ -13,10 +13,12 @@ import CardContent from "@material-ui/core/CardContent";
 const Login = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   //Capturo los cambios en el campo email
-  const handleEmailChange: React.ChangeEventHandler<HTMLInputElement> = (
-    event
-  ) => {
+  const handleEmailChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     dispatch({
       type: "setEmail",
       payload: event.target.value,
@@ -24,18 +26,22 @@ const Login = () => {
   };
 
   //Capturo los cambios en el campo password
-  const handlePasswordChange: React.ChangeEventHandler<HTMLInputElement> = (
-    event
-  ) => {
+  const handlePasswordChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     dispatch({
       type: "setPassword",
       payload: event.target.value,
     });
   };
   //onSubmit
-  const onSubmit = () => {};
+  const onSubmit = (event: MouseEvent) => {
+    event.preventDefault();
+    // llamo al servicio login
+    
+  };
   //onRecoverpassword
-  const onRecoverPassword = () => {};
+  const onRecoverPassword = (event: MouseEvent) => {
+    event.preventDefault();
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -56,6 +62,7 @@ const Login = () => {
                 required
                 fullWidth
                 onChange={handleEmailChange}
+                value={email}
                 id="email"
                 label="Email"
                 name="email"
@@ -70,6 +77,7 @@ const Login = () => {
                 name="password"
                 label="Password"
                 type="password"
+                value={password}
                 onChange={handlePasswordChange}
                 id="password"
                 autoComplete="current-password"
