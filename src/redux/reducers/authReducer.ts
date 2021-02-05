@@ -1,20 +1,27 @@
-import {
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  LOGOUT,
-} from "../actions/types";
+import { authTypes } from "../actions/types/authTypes";
+import User from './interfaces/User';
+
+const stateAuth = {
+  STATEONE: 'STATEONE', 
+  STATETWO: 'STATETWO',
+  STATETHREE: 'STATETHREE'
+}
 
 export type AuthState = {
   token: string;
-  user: object;
+  user: User;
   loading: boolean;
-  state: string;
+  state: string
 };
 
 const initialState: AuthState = {
   token: "",
-  user: {},
+  user: {
+    name: '',
+    surname: '',
+    id: 0,
+    state:false
+  },
   loading: false,
   state: "",
 };
@@ -24,23 +31,23 @@ export const authReducer = (
   action: any
 ): AuthState => {
   switch (action.type) {
-    case LOGIN_REQUEST:
+    case authTypes.LOGIN_REQUEST:
       return {
         ...state,
         
       };
-    case LOGIN_SUCCESS:
+    case authTypes.LOGIN_SUCCESS:
       return {
         ...state,
         token: action.payload.token,
         user: action.payload.user,
       };
-    case LOGIN_FAILURE:
+    case authTypes.LOGIN_FAILURE:
       return {
         ...state,
         
       };
-    case LOGOUT:
+    case authTypes.LOGOUT:
       return {
         ...state
     }

@@ -2,20 +2,23 @@ import React from 'react';
 import Button from "@material-ui/core/Button";
 
 type SubmitButtonProps = {
-    name: string,
-    onclick: string,
+    value: string,
+    onclick: Function,
     classname: string,
 }
-const SubmitButton = ({name, onclick, classname }: SubmitButtonProps) => {
+
+const SubmitButton = ({value, onclick, classname }: SubmitButtonProps) => {
     return(
-    <Button
+        <Button
         type="submit"
         fullWidth
         variant="contained"
         color="primary"
         className={classname}
-    >{name}
-    </Button>
+        onClick={()=>onclick}
+      >
+        {value}
+      </Button>
     )
 }
 

@@ -1,41 +1,39 @@
 import React, {useState, MouseEvent} from "react";
 import Container from "@material-ui/core/Container";
-import { useDispatch } from "react-redux";
-import TextField from "@material-ui/core/TextField";
+import { useDispatch, connect } from "react-redux";
 import logo from "../../assets/img/logo.png";
-import Button from "@material-ui/core/Button";
 import { Grid, Link } from "@material-ui/core";
 import useStyles from "./LoginStyles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import { loginRequest } from "../../redux/actions/authActions";
+import TextFieldOutlined from "../../components/common/TextFieldOutlined";
+import PasswordFieldOutlined from "../../components/common/PasswordFieldOutlined";
+import SubmitButton from '../../components/common/SubmitButton';
 
 const Login = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   //Capturo los cambios en el campo email
   const handleEmailChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    dispatch({
-      type: "setEmail",
-      payload: event.target.value,
-    });
+    
   };
 
   //Capturo los cambios en el campo password
   const handlePasswordChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    dispatch({
-      type: "setPassword",
-      payload: event.target.value,
-    });
+    
   };
+  
   //onSubmit
   const onSubmit = (event: MouseEvent) => {
     event.preventDefault();
     // llamo al servicio login
+    setEmail('');
+    setPassword('');
     
   };
   //onRecoverpassword
@@ -50,48 +48,10 @@ const Login = () => {
         <CardContent>
           <div className={classes.paper}>
             <img alt="Web Logo" className="logo" src={logo} />
-            <Grid container justify="center" alignItems="center">
-              <Grid item>
-                <hr />
-              </Grid>
-            </Grid>
             <form className={classes.form} noValidate>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                onChange={handleEmailChange}
-                value={email}
-                id="email"
-                label="Email"
-                name="email"
-                autoComplete="email"
-                autoFocus
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                value={password}
-                onChange={handlePasswordChange}
-                id="password"
-                autoComplete="current-password"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                onClick={onSubmit}
-              >
-                Ingresar
-              </Button>
+              <TextFieldOutlined name='email' value='Email' label={email} onchange={handleEmailChange}/>
+              <PasswordFieldOutlined name='password' value='Password' label={password} onchange={handlePasswordChange}/>
+              <SubmitButton value='Ingresar' onclick={onSubmit} classname={classes.submit}/>
               <Grid container justify="center" alignItems="center">
                 <Grid item>
                   <p>¿Te olvidaste la contraseña?</p>
@@ -108,4 +68,12 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state: any) => ({
+  loggingIn: state.authReducer.loggingIn
+});
+
+const actionCreators = {
+  login: loginRequest,
+};
+
+export default connect(mapStateToProps, actionCreators)(Login);
