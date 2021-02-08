@@ -7,38 +7,36 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Card from "@material-ui/core/Card";
 import TextField from "@material-ui/core/TextField";
 import CardContent from "@material-ui/core/CardContent";
-import SubmitButton from "../../components/common/SubmitButton";
+import Button from "@material-ui/core/Button";
+//import TextFieldOutlined from "../../components/common/TextFieldOutlined";
+//import Auth from "../../passapp-sdk/Auth";
+import { login } from '../../utils/auth'
 
 const Login = () => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  //const auth = new Auth();
+  
+
   //handleSubmit
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    alert(email)
-    let account = { email, password };
-    if (account) {
-      console.log("account", account);
+    anotherFunction(email,password)
+    setEmail('')
+    setPassword('')
+  };
+
+  //login user
+  function loginUser(email: string, password: string) {
+    if (email && password) {
+      //console.log(auth.login(email, password));
     }
-  };
-  // handleChange
-  const handleChange = (event: any) => {
-    if(event.target.name == 'email'){
-      setEmail(event.target.value)
-    }else{setPassword(event.target.value)}
-    console.log(email,password)
-  };
-  // login
-  /**async function loginUser(email: string,password:string){
-    return fetch('http:localhost:8080/login',{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({email,password})
-    }).then(data =>data.json())
-  }**/
+  }
+
+  const anotherFunction = async (email:string, password:string) => {
+    console.log(await login( email, password ))
+}
 
   return (
     <Container component="main" maxWidth="xs">
@@ -47,12 +45,16 @@ const Login = () => {
         <CardContent>
           <div className={classes.paper}>
             <img alt="Web Logo" className="logo" src={logo} />
-            <form className={classes.form} noValidate>
+            <form
+              className={classes.form}
+              noValidate
+              onSubmit={(e) => handleSubmit(e)}
+            >
               <TextField
                 id="outlined-search"
                 label="Email"
-                name='email'
-                onChange={handleChange}
+                name="email"
+                onChange={(e) => setEmail(e.target.value)}
                 type="search"
                 variant="outlined"
                 margin="normal"
@@ -63,7 +65,7 @@ const Login = () => {
                 id="outlined-password-input"
                 label="Password"
                 name="password"
-                onChange={handleChange}
+                onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 autoComplete="current-password"
                 variant="outlined"
@@ -71,11 +73,16 @@ const Login = () => {
                 required
                 fullWidth
               />
-              <SubmitButton
-                value="Ingresar"
-                onclick={handleSubmit}
-                classname={classes.submit}
-              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                
+                onClick={() => onclick}
+              >
+                Ingresar
+              </Button>
               <Grid container justify="center" alignItems="center">
                 <Grid item>
                   <p>¿Te olvidaste la contraseña?</p>

@@ -1,8 +1,8 @@
-
-  export function getHttpRequest(
+export class HttpRequest {
+  getHttpRequest(
     url: string,
     data: any,
-    method: string,
+    method: 'get' | 'post' | 'put' | 'delete',
     contentType?: string,
     baseUrl?: string,
     noHeaders?: any
@@ -42,7 +42,9 @@
         });
     });
   }
-  export function getBaseUrl() {
+  getBaseUrl() {
     return process.env.REACT_APP_BASE_URL;
   }
+}
+  
 
