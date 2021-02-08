@@ -15,7 +15,7 @@ const TextFieldOutlined = ({name, value, label, onchange}: TextFieldOutlinedProp
         margin="normal"
         required
         fullWidth
-        onChange={() => onchange}
+        onChange={(e) => onchange()}
         value={value}
         id={name}
         label={label}

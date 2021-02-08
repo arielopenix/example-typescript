@@ -4,3 +4,4 @@ export const authTypes = {
     LOGIN_FAILURE: 'USERS_LOGIN_FAILURE',
     LOGOUT:'USERS_LOGOUT'
 }
+
