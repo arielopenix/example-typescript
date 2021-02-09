@@ -1,4 +1,4 @@
-import { HttpRequest } from "./utils/HttpRequest";
+import { HttpRequest } from "./utils/httpRequest";
 
 export default class Auth {
   httpReq = new HttpRequest();
