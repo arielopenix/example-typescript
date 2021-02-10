@@ -1,22 +1,85 @@
+import { ResponseType } from "./GenericOption";
+import { GenericRequest } from "./GenericRequest";
+
 export class HttpRequest {
-  getHttpRequest(
+  private environment = {
+    baseUrl: "https://api.it-passapp.net/ws-security",
+  };
+
+  get<T>(
     url: string,
-    data: any,
-    method: 'get' | 'post' | 'put' | 'delete',
-    contentType?: string,
-    baseUrl?: string,
-    noHeaders?: any
-  ) {
-    if (!noHeaders) {
-      if (!contentType) contentType = "application/json";
-      if (data && contentType === "application/json") {
-        data = JSON.stringify(data);
-      }
-    }
+    params?: any,
+    headers?: any,
+    responseType?: ResponseType
+  ): Promise<T> {
+    const options: GenericRequest = {
+      method: "GET",
+      url,
+      options: { params, headers, responseType },
+    };
+    return this.requestAll<T>(options);
+  }
+  post<T,K>(
+    url: string,
+    body?: T,
+    params?: any,
+    headers?: any,
+    responseType?: ResponseType
+  ): Promise<K> {
+    const options: GenericRequest = {
+      method: "POST",
+      url,
+      options: { params, headers, body, responseType },
+    };
+    return this.requestAll<K>(options);
+  }
+  patch<T,K>(
+    url: string,
+    body: T,
+    params?: any,
+    headers?: any,
+    responseType?: ResponseType
+  ): Promise<K> {
+    const options: GenericRequest = {
+      method: "PATCH",
+      url,
+      options: { params, headers, body, responseType },
+    };
+    return this.requestAll<K>(options);
+  }
+  put<T,K>(
+    url: string,
+    body: T,
+    params?: any,
+    headers?: any,
+    responseType?: ResponseType
+  ): Promise<K> {
+    const options: GenericRequest = {
+      method: "PUT",
+      url,
+      options: { params, headers, body, responseType },
+    };
+    return this.requestAll<K>(options);
+  }
+  delete<T>(
+    url: string,
+    headers?: any,
+    responseType?: ResponseType
+  ): Promise<T> {
+    const options: GenericRequest = {
+      method: "DELETE",
+      url,
+      options: { headers, responseType },
+    };
+    return this.requestAll<T>(options);
+  }
+
+  requestAll<T>(requestOptions: GenericRequest): Promise<T> {
+    const { method, url, options } = requestOptions;
     return new Promise((resolve, reject) => {
-      fetch(`${baseUrl ? baseUrl : process.env.REACT_APP_BASE_URL}${url}`, {
-        method: method || "get",
-        body: data || null,
+      fetch(this.environment.baseUrl + url, {
+        method: method,
+        body: options?.body,
       })
         .then((response) => {
           response
@@ -42,9 +105,4 @@ export class HttpRequest {
         });
     });
   }
-  getBaseUrl() {
-    return process.env.REACT_APP_BASE_URL;
-  }
 }
-  
-

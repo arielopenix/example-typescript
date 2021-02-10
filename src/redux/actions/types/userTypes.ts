@@ -1,25 +1,37 @@
-//Type of Actions
 export const userTypes = {
-    ACTIVE_USER: 'ACTIVE_USER',
-    INACTIVE_USER: 'INACTIVE_USER',
+  GET_USER_REQUEST: "GET_USER_REQUEST",
+  GET_USER_SUCCESS: "GET_USER_SUCCESS",
+  GET_USER_ERROR: "GET_USER_ERROR",
 };
-//State
-export type UserState = {
-    name: string,
-    surname: string,
-    adress: string,
-    id: number,
-    isActive: boolean 
-}
-//Actions
-export interface UserActiveAction {
-    type: typeof userTypes.ACTIVE_USER,
-    payload: boolean
+
+export const usersTypes = {
+  FETCH_USERS_REQUEST: 'FETCH_USERS_REQUEST',
+  FETCH_USERS_SUCCESS: 'FETCH_USERS_SUCCESS',
+  FETCH_USERS_FAILURE: 'FETCH_USERS_FAILURE'
 }
 
-export interface UserInactiveAction {
-    type: typeof userTypes.INACTIVE_USER,
-    payload: boolean
-}
 
-export type UserActionTypes = UserActiveAction | UserInactiveAction;
+
+export interface User {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  adress: {
+    street: string;
+    suite: string;
+    city: string;
+    zipcode: string;
+    geo: {
+      lat: string;
+      lng: string;
+    }
+  },
+  phone: string;
+  website: string;
+  company: {
+    name: string;
+    catchPhrase: string;
+    bs: string;
+  }
+}

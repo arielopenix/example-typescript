@@ -1,29 +1,24 @@
 //definir la interface a partir de los datos que traiga del servidor
-import { authTypes } from "../actions/types/authTypes";
-import User from './interfaces/User';
+import { authTypes, LoginAction } from "../actions/types/authTypes";
+import { User } from "../actions/types/userTypes";
  
 export type AuthState = {
   token: string;
-  user: User;
+  user: any;
   loading: boolean;
   state: string
 };
 
 const initialState: AuthState = {
   token: "",
-  user: {
-    name: '',
-    surname: '',
-    id: 0,
-    state:false
-  },
+  user: null,
   loading: false,
   state: "",
 }
 
 export const authReducer = (
   state: any = initialState,
-  action: any
+  action: LoginAction
 ): AuthState => {
   switch (action.type) {
     case authTypes.LOGIN_REQUEST:
@@ -35,7 +30,7 @@ export const authReducer = (
       return {
         ...state,
         token: action.payload.token,
-        user: action.payload.user,
+        user: action.payload.User,
       };
     case authTypes.LOGIN_FAILURE:
       return {

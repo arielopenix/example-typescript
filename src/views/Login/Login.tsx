@@ -5,93 +5,81 @@ import { Grid, Link } from "@material-ui/core";
 import useStyles from "./LoginStyles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Card from "@material-ui/core/Card";
-import TextField from "@material-ui/core/TextField";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-//import TextFieldOutlined from "../../components/common/TextFieldOutlined";
-//import Auth from "../../passapp-sdk/Auth";
-//import { login } from '../../utils/auth'
+import TextFieldOutlined from "../../components/common/TextFieldOutlined";
+import Auth from "../../passapp-sdk/Auth";
+import SubmitButton from "../../components/common/SubmitButton";
+
+/**import {
+  dataLoginReducer,
+  loginInitialState,
+} from "../../redux/reducers/dataLoginReducer";**/
 
 const Login = () => {
   const classes = useStyles();
+  const auth = new Auth();
+  //const [state, dispatch] = useReducer(dataLoginReducer, loginInitialState);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //const auth = new Auth();
 
   //handleSubmit
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    setEmail("");
-    setPassword("");
+    auth.login(email, password);
   };
 
   //login user
+  function loginUser(email: string, password: string) {
+    if (email && password) {
+      auth.login(email, password);
+    }
+  }
+
+  const handleChange = () => {};
 
   return (
-    <Grid
-      container
-      justify="center"
-      direction="column"
-      alignItems="center"
-      style={{ minHeight: "100vh" }}
-    >
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Card variant="outlined">
-          <CardContent>
-            <div className={classes.paper}>
-              <img alt="Web Logo" className="logo" src={logo} />
-              <form
-                className={classes.form}
-                noValidate
-                onSubmit={(e) => handleSubmit(e)}
-              >
-                <TextField
-                  id="outlined-search"
-                  label="Email"
-                  name="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  type="search"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                />
-                <TextField
-                  id="outlined-password-input"
-                  label="Password"
-                  name="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  type="password"
-                  autoComplete="current-password"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  onClick={() => onclick}
-                >
-                  Ingresar
-                </Button>
-                <Grid container justify="center" alignItems="center">
-                  <Grid item>
-                    <p>¿Te olvidaste la contraseña?</p>
-                    <Link href="#" variant="body2">
-                      Contactar con el Administrador
-                    </Link>
-                  </Grid>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Card variant="outlined">
+        <CardContent>
+          <div className={classes.paper}>
+            <img alt="Web Logo" className="logo" src={logo} />
+            <form
+              className={classes.form}
+              noValidate
+              onSubmit={(e) => handleSubmit(e)}
+            >
+              <TextFieldOutlined
+                name="email"
+                type="text"
+                label="Email"
+                onchange={handleChange}
+              />
+              <TextFieldOutlined
+                name="password"
+                type="password"
+                label="Password"
+                onchange={handleChange}
+              />
+              <SubmitButton
+                value="INGRESAR"
+                colorbutton="primary"
+                onclick={handleSubmit}
+                classname="submit"
+              />
+              <Grid container justify="center" alignItems="center">
+                <Grid item>
+                  <p>¿Te olvidaste la contraseña?</p>
+                  <Link href="#" variant="body2">
+                    Contactar con el Administrador
+                  </Link>
                 </Grid>
-              </form>
-            </div>
-          </CardContent>
-        </Card>
-      </Container>
-    </Grid>
+              </Grid>
+            </form>
+          </div>
+        </CardContent>
+      </Card>
+    </Container>
   );
 };
 

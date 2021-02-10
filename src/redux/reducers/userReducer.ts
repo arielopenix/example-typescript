@@ -1,25 +1,40 @@
-import { userTypes, UserState,UserActionTypes } from '../actions/types/userTypes'
+import { User, usersTypes } from "../actions/types/userTypes";
 
-const initialState:UserState = {
-    name: 'Cristian',
-    surname: 'Almiron',
-    adress:'Montenovi 511',
-    id: 0,
-    isActive: true
-}
+export type UsersState = {
+  loading: boolean;
+  users: Array<User>;
+  error: string;
+};
 
-export function userReducer(state: UserState = initialState, action: UserActionTypes): UserState{
-    switch (action.type) {
-        case userTypes.ACTIVE_USER:
-            return {
-                ...state,
-                isActive: true
-            }
-        case userTypes.INACTIVE_USER:
-            return {
-                ...state,
-                isActive: false
-            }        
-        default: return state;
-    }
-}
+const initialState: UsersState = {
+  loading: false,
+  users: [],
+  error: "",
+};
+
+export const userReducer = (
+  state: UsersState = initialState,
+  action: any
+): UsersState => {
+  switch (action.type) {
+    case usersTypes.FETCH_USERS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case usersTypes.FETCH_USERS_SUCCESS:
+      return {
+        loading: false,
+        users: action.payload,
+        error: "",
+      };
+    case usersTypes.FETCH_USERS_FAILURE:
+      return {
+        loading: false,
+        users: [],
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
