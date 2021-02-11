@@ -1,7 +1,6 @@
-export const messageActions = {
-    SEND_MESSAGE: "SEND_MESSAGE",
-    DELETE_MESSAGE: "DELETE_MESSAGE"
-}
+export const SEND_MESSAGE = "SEND_MESSAGE"; 
+export const DELETE_MESSAGE = "DELETE_MESSAGE";
+export const UPDATE_SESSION = 'UPDATE_SESSION';
 
 export interface Message {
   user: string;
@@ -20,15 +19,21 @@ export interface SystemState {
 }
 
 interface SendMessageAction {
-  type: typeof messageActions.SEND_MESSAGE;
+  type: typeof SEND_MESSAGE;
   payload: Message;
 }
 
 interface DeleteMessageAction {
-  type: typeof messageActions.DELETE_MESSAGE;
+  type: typeof DELETE_MESSAGE;
   meta: {
     timestamp: number;
   };
 }
 
+interface UpdateSessionAction {
+  type: typeof UPDATE_SESSION
+  payload: SystemState
+}
+
 export type ChatActionTypes = SendMessageAction | DeleteMessageAction;
+export type SystemActionTypes = UpdateSessionAction

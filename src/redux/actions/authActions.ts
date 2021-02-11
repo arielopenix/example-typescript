@@ -1,25 +1,73 @@
-import { authTypes } from './types/authTypes';
+import {
+  Authentication,
+  LOGIN_FAILURE,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGOUT,
+  AuthAction,
+} from "./types/authTypes";
 import Auth from "../../passapp-sdk/Auth";
+import { ThunkAction } from "redux-thunk";
+import { RootState } from "../reducers/rootReducer";
+import { Action } from "redux";
 
 const auth = new Auth();
-
-export const loginRequest = () => {
-    return {
-        type: authTypes.LOGIN_REQUEST
-    }
+//Actions
+export const loginRequest = (auth: Authentication): AuthAction => {
+  return {
+    type: LOGIN_REQUEST,
+    payload: auth,
+  };
 };
 
-export const logout = () => {
-    return {
-        type: authTypes.LOGOUT
-    }
+export const loginSuccess = (auth: Authentication): AuthAction => {
+  return {
+    type: LOGIN_SUCCESS,
+    payload: auth,
+  };
 };
 
-export const login = (email: string, password: string) => {
-    return (dispatch: any) => {
-        dispatch(loginRequest);
-        auth.login(email,password)
-        .then(response => response.json())
-        .then( response => response.data)
-    }
-}
+export const loginFailure = (error: Error): AuthAction => {
+  return {
+    type: LOGIN_FAILURE,
+    payload: error,
+  };
+};
+
+export const logout = (state: boolean): AuthAction => {
+  return {
+    type: LOGOUT,
+    payload: {
+      state,
+    },
+  };
+};
+// API Actions
+export const login = (email: string, password: string, history: any) => {
+  return (dispatch: any) => {
+    dispatch(loginRequest);
+    auth.login(email, password)
+        .then((response) => response.json())
+        .then((data) => {
+        const token = `Bearer ${data.token}`;
+        if (token) {
+          dispatch(loginSuccess)
+          localStorage.setItem("token", `Bearer ${data.token}`);
+          console.log("login ok!");
+          history.push("/menu"); // redirecciono al menu
+        }
+        dispatch(loginFailure);
+        })
+        .catch((err) => {
+            console.log(`Error: ${err}`);
+            dispatch(loginFailure);
+        });
+    };
+};
+
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;

@@ -1,6 +1,6 @@
 //definir la interface a partir de los datos que traiga del servidor
-import { authTypes, LoginAction } from "../actions/types/authTypes";
-import { User } from "../actions/types/userTypes";
+import { authTypes } from "../actions/types/authTypes";
+//import { User } from "../actions/types/userTypes";
  
 export type AuthState = {
   token: string;
@@ -18,7 +18,7 @@ const initialState: AuthState = {
 
 export const authReducer = (
   state: any = initialState,
-  action: LoginAction
+  action: any
 ): AuthState => {
   switch (action.type) {
     case authTypes.LOGIN_REQUEST:

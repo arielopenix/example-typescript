@@ -1,13 +1,11 @@
 import { User } from '../types/userTypes'
 
-export enum authTypes {
-    LOGIN_REQUEST, 
-    LOGIN_SUCCESS,
-    LOGIN_FAILURE,
-    LOGOUT
-}
+export const LOGIN_REQUEST = 'LOGIN_REQUEST'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS' 
+export const LOGIN_FAILURE = 'LOGIN_FAILURE'
+export const LOGOUT ='LOGOUT'
 
-export interface Auth {
+export interface Authentication {
     token: string;
     User: User;
     loading: boolean;
@@ -18,17 +16,27 @@ export interface Auth {
     }
   }
   
-  export interface LoginAction {
-    type: authTypes;
-    payload: Auth;
+  interface AuthRequestAction {
+    type: typeof LOGIN_REQUEST;
+    payload: Authentication;
+  }
+
+  interface AuthSuccessAction {
+    type: typeof LOGIN_SUCCESS;
+    payload: Authentication;
+  }
+
+  interface AuthFailureAction {
+    type: typeof LOGIN_FAILURE;
+    payload: Error;
   }
   
-  export interface LogoutAction {
-    type: authTypes;
+  interface AuthLogoutAction {
+    type: typeof LOGOUT;
     payload: {
       state: boolean;
     };
-
-  
   }
+
+  export type AuthAction = AuthRequestAction | AuthSuccessAction | AuthFailureAction | AuthLogoutAction
 

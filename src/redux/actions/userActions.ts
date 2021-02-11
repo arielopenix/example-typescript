@@ -1,9 +1,8 @@
-//import { HttpRequest } from "../../passapp-sdk/utils/HttpRequest";
+import { HttpRequest } from "../../passapp-sdk/utils/HttpRequest";
 import { User, usersTypes } from "./types/userTypes";
 import axios from 'axios'
 
-
-//const httpReq = new HttpRequest();
+const httpReq = new HttpRequest();
 
 export const fetchUsersRequest = () => {
     return {
@@ -18,20 +17,20 @@ export const fetchUsersSuccess = (users: User[]) => {
     }
 }
 
-
 export const fetchUsersFailure = (error: Error) => {
     return {
         type: usersTypes.FETCH_USERS_FAILURE,
         payload: error
     }
 }
-
+//example with axios
 export const fetchUsers = () => {
     return (dispatch: any) => {
         dispatch(fetchUsersRequest);
         axios.get('https://jsonplaceholder.typicode.com/users')
-        .then(response=> {
+        .then(response => {
             const users = response.data
+            console.log(users)
             dispatch(fetchUsersSuccess(users))
         })
         .catch(error =>{
@@ -40,4 +39,18 @@ export const fetchUsers = () => {
         })
     }
 }
-
+// example with services
+export const fetchUsers2 = () => {
+    return (dispatch: any) => {
+        dispatch(fetchUsersRequest);
+        httpReq.get('https://jsonplaceholder.typicode.com/users')
+        .then((response: any ) => {response.json()})
+        .then((data) => {
+            console.log(data)
+        })
+        .catch(error =>{
+            const errorMessage = error.message
+            dispatch(fetchUsersFailure(errorMessage))
+        })
+    }
+}
