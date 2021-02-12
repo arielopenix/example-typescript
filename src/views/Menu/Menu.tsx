@@ -1,6 +1,5 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import useStyles from "./MenuStyles";
 import Button from "@material-ui/core/Button";
 import { MemoryRouter as Router } from "react-router";
 import {
@@ -16,7 +15,7 @@ const LinkBehavior = React.forwardRef<any, Omit<RouterLinkProps, "to">>(
 );
 
 const Menu = () => {
-  const classes = useStyles();
+
   return (
     <>
       <Grid

@@ -2,10 +2,6 @@ import { ResponseType } from "./GenericOption";
 import { GenericRequest } from "./GenericRequest";
 
 export class HttpRequest {
-  private environment = {
-    baseUrl: "https://api.it-passapp.net/ws-security",
-  };
-
   get<T>(
     url: string,
     params?: any,
@@ -19,7 +15,7 @@ export class HttpRequest {
     };
     return this.requestAll<T>(options);
   }
-  post<T,K>(
+  post<T, K>(
     url: string,
     body?: T,
     params?: any,
@@ -33,7 +29,7 @@ export class HttpRequest {
     };
     return this.requestAll<K>(options);
   }
-  patch<T,K>(
+  patch<T, K>(
     url: string,
     body: T,
     params?: any,
@@ -47,7 +43,7 @@ export class HttpRequest {
     };
     return this.requestAll<K>(options);
   }
-  put<T,K>(
+  put<T, K>(
     url: string,
     body: T,
     params?: any,
@@ -73,13 +69,13 @@ export class HttpRequest {
     };
     return this.requestAll<T>(options);
   }
-
   requestAll<T>(requestOptions: GenericRequest): Promise<T> {
     const { method, url, options } = requestOptions;
     return new Promise((resolve, reject) => {
-      fetch(this.environment.baseUrl + url, {
+      //const configValue: string = (process.env.REACT_APP_BASE_URL as string);
+      fetch(process.env.REACT_APP_BASE_URL + url, {
         method: method,
-        body: options?.body,
+        body: JSON.stringify(options?.body),
       })
         .then((response) => {
           response

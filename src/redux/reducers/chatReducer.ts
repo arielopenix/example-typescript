@@ -2,10 +2,8 @@ import {
     ChatState,
     SystemState,
     ChatActionTypes,
-    SEND_MESSAGE,
-    DELETE_MESSAGE,
     SystemActionTypes,
-    UPDATE_SESSION
+    ChatActionType
   } from '../actions/types/chatTypes'
   
   const initialStateChat: ChatState = {
@@ -23,11 +21,11 @@ import {
     action: ChatActionTypes
   ): ChatState {
     switch (action.type) {
-      case SEND_MESSAGE:
+      case ChatActionType.SEND_MESSAGE:
         return {
           messages: [...state.messages, action.payload]
         }
-      case DELETE_MESSAGE:
+      case ChatActionType.DELETE_MESSAGE:
         return {
           messages: state.messages.filter(
             message => message.timestamp !== action.meta.timestamp
@@ -43,7 +41,7 @@ import {
     action: SystemActionTypes
   ): SystemState {
     switch (action.type) {
-      case UPDATE_SESSION: {
+      case ChatActionType.UPDATE_SESSION: {
         return {
           ...state,
           ...action.payload

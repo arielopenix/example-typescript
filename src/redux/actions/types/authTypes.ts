@@ -1,9 +1,11 @@
 import { User } from '../types/userTypes'
 
-export const LOGIN_REQUEST = 'LOGIN_REQUEST'
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS' 
-export const LOGIN_FAILURE = 'LOGIN_FAILURE'
-export const LOGOUT ='LOGOUT'
+export enum AuthActionType {
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT
+}
 
 export interface Authentication {
     token: string;
@@ -17,22 +19,22 @@ export interface Authentication {
   }
   
   interface AuthRequestAction {
-    type: typeof LOGIN_REQUEST;
+    type: AuthActionType.LOGIN_REQUEST;
     payload: Authentication;
   }
 
   interface AuthSuccessAction {
-    type: typeof LOGIN_SUCCESS;
+    type: AuthActionType.LOGIN_SUCCESS;
     payload: Authentication;
   }
 
   interface AuthFailureAction {
-    type: typeof LOGIN_FAILURE;
+    type: AuthActionType.LOGIN_FAILURE;
     payload: Error;
   }
   
   interface AuthLogoutAction {
-    type: typeof LOGOUT;
+    type: AuthActionType.LOGOUT;
     payload: {
       state: boolean;
     };

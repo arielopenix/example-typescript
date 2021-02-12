@@ -1,6 +1,8 @@
-export const SEND_MESSAGE = "SEND_MESSAGE"; 
-export const DELETE_MESSAGE = "DELETE_MESSAGE";
-export const UPDATE_SESSION = 'UPDATE_SESSION';
+export enum ChatActionType {
+  SEND_MESSAGE, 
+  DELETE_MESSAGE,
+  UPDATE_SESSION
+}
 
 export interface Message {
   user: string;
@@ -19,19 +21,19 @@ export interface SystemState {
 }
 
 interface SendMessageAction {
-  type: typeof SEND_MESSAGE;
+  type: ChatActionType.SEND_MESSAGE;
   payload: Message;
 }
 
 interface DeleteMessageAction {
-  type: typeof DELETE_MESSAGE;
+  type: ChatActionType.DELETE_MESSAGE;
   meta: {
     timestamp: number;
   };
 }
 
 interface UpdateSessionAction {
-  type: typeof UPDATE_SESSION
+  type: ChatActionType.UPDATE_SESSION
   payload: SystemState
 }
 

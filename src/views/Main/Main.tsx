@@ -1,11 +1,8 @@
 import React from "react";
-import useStyles from "./MainStyles";
 import { Grid } from "@material-ui/core";
 import NavBar from '../../components/NavBar/NavBar';
 
-
 const Main = () => {
-  const classes = useStyles();
   return (
     <>
       <NavBar/>

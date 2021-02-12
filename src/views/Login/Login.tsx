@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Container from "@material-ui/core/Container";
 import logo from "../../assets/img/logo.png";
 import { Grid, Link } from "@material-ui/core";
 import useStyles from "./LoginStyles";
+import useInput from "../../hooks/useInput";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -10,32 +11,21 @@ import TextFieldOutlined from "../../components/common/TextFieldOutlined";
 import Auth from "../../passapp-sdk/Auth";
 import SubmitButton from "../../components/common/SubmitButton";
 
-/**import {
-  dataLoginReducer,
-  loginInitialState,
-} from "../../redux/reducers/dataLoginReducer";**/
-
 const Login = () => {
   const classes = useStyles();
   const auth = new Auth();
   //const [state, dispatch] = useReducer(dataLoginReducer, loginInitialState);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { value:email, bind: bindEmail, reset: resetEmail } = useInput('cristian@openix.com.ar');
+  const { value:password, bind: bindPassword, reset: resetPassword } = useInput('123456');
 
   //handleSubmit
   const handleSubmit = (e: any) => {
     e.preventDefault();
     auth.login(email, password);
+    console.log(`Email: ${email} Password: ${password}`)
+    resetEmail();
+    resetPassword();
   };
-
-  //login user
-  function loginUser(email: string, password: string) {
-    if (email && password) {
-      auth.login(email, password);
-    }
-  }
-
-  const handleChange = () => {};
 
   return (
     <Container component="main" maxWidth="xs">
@@ -47,19 +37,18 @@ const Login = () => {
             <form
               className={classes.form}
               noValidate
-              onSubmit={(e) => handleSubmit(e)}
             >
               <TextFieldOutlined
                 name="email"
                 type="text"
                 label="Email"
-                onchange={handleChange}
+                {...bindEmail}
               />
               <TextFieldOutlined
                 name="password"
                 type="password"
                 label="Password"
-                onchange={handleChange}
+                {...bindPassword}
               />
               <SubmitButton
                 value="INGRESAR"

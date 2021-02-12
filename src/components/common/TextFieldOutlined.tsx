@@ -3,20 +3,18 @@ import TextField from "@material-ui/core/TextField";
 
 type TextFieldOutlinedProps = {
     name: string,
-    value: string,
+    type: string,
     label: string,
-    onchange: Function,
 }
 
-const TextFieldOutlined = ({name, value, label, onchange}: TextFieldOutlinedProps) => {
+const TextFieldOutlined = ({name, type, label}: TextFieldOutlinedProps) => {
     return(
     <TextField
         variant="outlined"
         margin="normal"
         required
         fullWidth
-        onChange={(e) => onchange(e.target.value)}
-        value={value}
+        type={type}
         id={name}
         label={label}
         name={name}

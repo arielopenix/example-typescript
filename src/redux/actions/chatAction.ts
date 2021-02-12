@@ -1,12 +1,12 @@
 import { Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from '../reducers/rootReducer';
-import { Message, SEND_MESSAGE, DELETE_MESSAGE, ChatActionTypes, UPDATE_SESSION, SystemState, SystemActionTypes } from './types/chatTypes'
+import { Message, ChatActionType, SystemState, SystemActionTypes, ChatActionTypes } from './types/chatTypes';
 
 // TypeScript infers that this function is returning SendMessageAction
 export function sendMessage(newMessage: Message): ChatActionTypes {
   return {
-    type: SEND_MESSAGE,
+    type: ChatActionType.SEND_MESSAGE,
     payload: newMessage
   }
 }
@@ -14,7 +14,7 @@ export function sendMessage(newMessage: Message): ChatActionTypes {
 // TypeScript infers that this function is returning DeleteMessageAction
 export function deleteMessage(timestamp: number): ChatActionTypes {
   return {
-    type: DELETE_MESSAGE,
+    type: ChatActionType.DELETE_MESSAGE,
     meta: {
       timestamp
     }
@@ -23,14 +23,14 @@ export function deleteMessage(timestamp: number): ChatActionTypes {
 
 export function updateSession(newSession: SystemState): SystemActionTypes {
     return {
-      type: UPDATE_SESSION,
+      type: ChatActionType.UPDATE_SESSION,
       payload: newSession
     }
 }
 
 export const thunkSendMessage = (
   message: string
-): ThunkAction<void, RootState, unknown, Action<string>> => async (
+): ThunkAction<void, RootState, unknown, Action<any>> => async (
   dispatch
 ) => {
   const asyncResp = await exampleAPI();

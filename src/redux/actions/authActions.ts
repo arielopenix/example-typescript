@@ -1,11 +1,4 @@
-import {
-  Authentication,
-  LOGIN_FAILURE,
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGOUT,
-  AuthAction,
-} from "./types/authTypes";
+import { Authentication, AuthActionType, AuthAction } from "./types/authTypes";
 import Auth from "../../passapp-sdk/Auth";
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "../reducers/rootReducer";
@@ -15,28 +8,28 @@ const auth = new Auth();
 //Actions
 export const loginRequest = (auth: Authentication): AuthAction => {
   return {
-    type: LOGIN_REQUEST,
+    type: AuthActionType.LOGIN_REQUEST,
     payload: auth,
   };
 };
 
 export const loginSuccess = (auth: Authentication): AuthAction => {
   return {
-    type: LOGIN_SUCCESS,
+    type: AuthActionType.LOGIN_SUCCESS,
     payload: auth,
   };
 };
 
 export const loginFailure = (error: Error): AuthAction => {
   return {
-    type: LOGIN_FAILURE,
+    type: AuthActionType.LOGIN_FAILURE,
     payload: error,
   };
 };
 
 export const logout = (state: boolean): AuthAction => {
   return {
-    type: LOGOUT,
+    type: AuthActionType.LOGOUT,
     payload: {
       state,
     },
@@ -46,23 +39,24 @@ export const logout = (state: boolean): AuthAction => {
 export const login = (email: string, password: string, history: any) => {
   return (dispatch: any) => {
     dispatch(loginRequest);
-    auth.login(email, password)
-        .then((response) => response.json())
-        .then((data) => {
+    auth
+      .login(email, password)
+      .then((response) => response.json())
+      .then((data) => {
         const token = `Bearer ${data.token}`;
         if (token) {
-          dispatch(loginSuccess)
+          dispatch(loginSuccess);
           localStorage.setItem("token", `Bearer ${data.token}`);
           console.log("login ok!");
           history.push("/menu"); // redirecciono al menu
         }
         dispatch(loginFailure);
-        })
-        .catch((err) => {
-            console.log(`Error: ${err}`);
-            dispatch(loginFailure);
-        });
-    };
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+        dispatch(loginFailure);
+      });
+  };
 };
 
 export type AppThunk<ReturnType = void> = ThunkAction<

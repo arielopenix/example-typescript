@@ -5,7 +5,7 @@ export default class Auth {
   //Services
   login(email: string, password: string): Promise<any> {
     return this.httpReq.post(
-      `ws/security`,
+      `ws-security`,
       { email: email, password: password }
     );
   }
