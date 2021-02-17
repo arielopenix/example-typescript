@@ -1,6 +1,6 @@
 import { HttpRequest } from "../../passapp-sdk/utils/HttpRequest";
 import { User, usersTypes } from "./types/userTypes";
-import axios from 'axios'
+//import axios from 'axios'
 
 const httpReq = new HttpRequest();
 
@@ -23,7 +23,7 @@ export const fetchUsersFailure = (error: Error) => {
         payload: error
     }
 }
-//example with axios
+/**example with axios
 export const fetchUsers = () => {
     return (dispatch: any) => {
         dispatch(fetchUsersRequest);
@@ -38,9 +38,10 @@ export const fetchUsers = () => {
             dispatch(fetchUsersFailure(errorMessage))
         })
     }
-}
+} 
+*/
 // example with services
-export const fetchUsers2 = () => {
+export const fetchUsers = () => {
     return (dispatch: any) => {
         dispatch(fetchUsersRequest);
         httpReq.get('https://jsonplaceholder.typicode.com/users')

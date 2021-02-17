@@ -1,31 +1,60 @@
-import React from "react";
+import React, { useReducer } from "react";
 import Container from "@material-ui/core/Container";
 import logo from "../../assets/img/logo.png";
 import { Grid, Link } from "@material-ui/core";
 import useStyles from "./LoginStyles";
-import useInput from "../../hooks/useInput";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import TextFieldOutlined from "../../components/common/TextFieldOutlined";
-import Auth from "../../passapp-sdk/Auth";
+//import Auth from "../../passapp-sdk/Auth";
 import SubmitButton from "../../components/common/SubmitButton";
+import { LoginActionType } from "../../redux/actions/types/loginTypes";
+import {
+  loginReducer,
+  loginInitialState,
+} from "../../redux/reducers/loginReducer";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema } from "../../utils/validations/LoginValidationSquema";
+import { useTranslation } from "react-i18next"
+
 
 const Login = () => {
   const classes = useStyles();
-  const auth = new Auth();
-  //const [state, dispatch] = useReducer(dataLoginReducer, loginInitialState);
-  const { value:email, bind: bindEmail, reset: resetEmail } = useInput('cristian@openix.com.ar');
-  const { value:password, bind: bindPassword, reset: resetPassword } = useInput('123456');
+  //const auth = new Auth();
+  const { t, i18n } = useTranslation();
+  const [state, dispatch] = useReducer(loginReducer, loginInitialState);
+  const { email, password, error } = state;
+  const { register, handleSubmit, errors } = useForm({
+    resolver: yupResolver(loginSchema),
+  });
 
-  //handleSubmit
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    auth.login(email, password);
-    console.log(`Email: ${email} Password: ${password}`)
-    resetEmail();
-    resetPassword();
+  //onSubmit
+  const onSubmit = async (e: React.FormEvent) => {
+    dispatch({ type: LoginActionType.LOGIN });
+    try {
+      console.log(`Email: ${email} Password: ${password}`);
+      //await auth.login(email, password);
+      dispatch({ type: LoginActionType.LOGIN_SUCCESS });
+      //redirecciono al menu
+    } catch (error: any) {
+      dispatch({ type: LoginActionType.LOGIN_ERROR });
+    }
   };
+  //onChange
+  const handleChange = (e: any, field: any) => {
+    dispatch({
+      type: LoginActionType.LOGIN_FIELD,
+      fieldName: field,
+      payload: e.currentTarget.value,
+    });
+  };
+  //onChangeLanguaje
+  const onChangeLanguaje = () => {
+    i18n.changeLanguage({lng: languaje});
+  }
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -37,24 +66,38 @@ const Login = () => {
             <form
               className={classes.form}
               noValidate
+              onSubmit={handleSubmit((e: any) => onSubmit(e))}
             >
               <TextFieldOutlined
                 name="email"
                 type="text"
                 label="Email"
-                {...bindEmail}
+                value={email}
+                inputref={register}
+                onchange={(e: React.FormEvent) => handleChange(e, "email")}
               />
+              <p className={classes.error}>{errors.email?.message}</p>
               <TextFieldOutlined
                 name="password"
                 type="password"
                 label="Password"
-                {...bindPassword}
+                value={password}
+                inputref={register}
+                onchange={(e: any) =>
+                  dispatch({
+                    type: LoginActionType.LOGIN_FIELD,
+                    fieldName: "password",
+                    payload: e.currentTarget.value,
+                  })
+                }
               />
+              <p className={classes.error}>{errors.password?.message}</p>
+              <p className={classes.error}>{error}</p>
               <SubmitButton
                 value="INGRESAR"
                 colorbutton="primary"
-                onclick={handleSubmit}
                 classname="submit"
+                disabled={false}
               />
               <Grid container justify="center" alignItems="center">
                 <Grid item>
