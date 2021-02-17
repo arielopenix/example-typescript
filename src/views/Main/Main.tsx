@@ -1,11 +1,10 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
-import NavBar from '../../components/NavBar/NavBar';
+
 
 const Main = () => {
   return (
     <>
-      <NavBar/>
       <Grid
         container
         justify="center"

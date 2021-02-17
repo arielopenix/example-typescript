@@ -52,7 +52,7 @@ const Login = () => {
   };
   //onChangeLanguaje
   const onChangeLanguaje = () => {
-    i18n.changeLanguage({lng: languaje});
+    i18n.changeLanguage();
   }
 
 
