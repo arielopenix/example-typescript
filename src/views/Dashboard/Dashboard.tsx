@@ -3,6 +3,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { useStyles } from "./DashboardStyles";
 import NavBar from "../../layout/NavBar/NavBar";
 import NavigationDrawer from "../../layout/NavigationDrawer/NavigationDrawer";
+import { BrowserRouter as Router } from "react-router-dom";
 
 interface Props {
   window?: () => Window;
@@ -26,15 +27,17 @@ const Dashboard = (props: Props) => {
       (/**Barra de Navegacion**/)
       <NavBar onclick={handleDrawerToggle} />
       (/**Menu Lateral**/)
-      <NavigationDrawer
-        container={container}
-        onclose={handleDrawerToggle}
-        open={mobileOpen}
-      />
-      (/**Seccion principal**/)
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-      </main>
+      <Router>
+        <NavigationDrawer
+          container={container}
+          onclose={handleDrawerToggle}
+          open={mobileOpen}
+        />
+        (/**Seccion principal**/)
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+        </main>
+      </Router>
     </div>
   );
 };

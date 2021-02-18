@@ -2,6 +2,9 @@ import { pink } from '@material-ui/core/colors';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    flexGrow: 1,
+  },
   appBar: {
     [theme.breakpoints.up("sm")]: {
       width: `calc(100% - ${drawerWidth}px)`,
@@ -14,11 +17,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up("sm")]: {
       display: "none",
     },
+    flexGrow: 1
   },
-  pink: {
-    color: theme.palette.getContrastText(pink[500]),
-    backgroundColor: pink[500],
-  },
+  user: {
+    flexGrow: 1
+  }
 }));
 
 export default useStyles;
