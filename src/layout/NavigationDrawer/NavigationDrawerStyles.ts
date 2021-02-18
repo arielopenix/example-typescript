@@ -18,6 +18,10 @@ export const useStyles = makeStyles((theme: Theme) =>
       position: "absolute",
       height: "100px",
       
+    },
+    mobilemenu: {
+      position: "absolute",
+      bottom: "0px"
     }
   })
 );

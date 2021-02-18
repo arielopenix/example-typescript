@@ -4,7 +4,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import useStyles from "./NavBarStyles";
-import Button from "@material-ui/core/Button";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 type NavbarProps = {
   onclick: any;
@@ -17,7 +17,7 @@ const NavBar = ({ onclick }: NavbarProps) => {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <IconButton
-            color="inherit"
+            color="primary"
             aria-label="open drawer"
             edge="start"
             onClick={onclick}
@@ -25,7 +25,7 @@ const NavBar = ({ onclick }: NavbarProps) => {
           >
             <MenuIcon />
           </IconButton>
-          <Button variant="contained">Default</Button>
+         <AccountCircleIcon/>
         </Toolbar>
       </AppBar>
     </div>

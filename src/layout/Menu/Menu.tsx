@@ -20,7 +20,7 @@ const Menu = ({ items }: menuProps) => {
             const { text, icon, onClick } = item;
             return (
               <ListItem button key={index} onClick={onClick}>
-                {icon && <ListItemIcon>{icon}</ListItemIcon>}
+                {icon && <ListItemIcon className={classes.icon}>{icon}</ListItemIcon>}
                 <ListItemText className={classes.text} primary={text} />
               </ListItem>
             );

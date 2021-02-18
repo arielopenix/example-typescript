@@ -9,8 +9,8 @@ export const useStyles = makeStyles((theme: Theme) =>
       fontSize: "18px"
     },
     icon: {
-      height: "12px",
-      weight: "12px",
+      height: "10px",
+      weight: "10px",
       color: "#FFFFFF"
     },
     item: {

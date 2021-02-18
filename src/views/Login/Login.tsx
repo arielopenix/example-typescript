@@ -17,13 +17,13 @@ import {
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../utils/validations/LoginValidationSquema";
-import { useTranslation } from "react-i18next"
+//import { useTranslation } from "react-i18next"
 
 
 const Login = () => {
   const classes = useStyles();
   //const auth = new Auth();
-  const { t, i18n } = useTranslation();
+  //const { t, i18n } = useTranslation();
   const [state, dispatch] = useReducer(loginReducer, loginInitialState);
   const { email, password, error } = state;
   const { register, handleSubmit, errors } = useForm({
@@ -50,10 +50,10 @@ const Login = () => {
       payload: e.currentTarget.value,
     });
   };
-  //onChangeLanguaje
+  /**onChangeLanguaje
   const onChangeLanguaje = () => {
     i18n.changeLanguage();
-  }
+  }*/
 
 
   return (

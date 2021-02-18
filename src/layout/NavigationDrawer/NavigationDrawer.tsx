@@ -7,6 +7,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 //import logo from "../../assets/img/logo.png";
 import { useTheme } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
+import Box from "@material-ui/core/Box/Box";
 
 type NavigationDrawerProps = {
   container: any;
@@ -22,41 +23,48 @@ const NavigationDrawer = ({
   const classes = useStyles();
   const theme = useTheme();
   const history = useHistory();
-  const menuItems = [
+  const desktopMenuItems = [
     {
-      text: "Menu1",
-      icon: <InboxIcon/>,
-      onClick: () => history.push('/')
+      text: "Ingreso Manual",
+      icon: <InboxIcon />,
+      onClick: () => history.push("/dashboard/manualInput"),
     },
     {
-      text: "Menu2",
-      icon: <InboxIcon/>,
-      onClick: () => history.push('/')
+      text: "Escanear Documento",
+      icon: <InboxIcon />,
+      onClick: () => history.push("/dashboard/scanDocument"),
     },
     {
-      text: "Menu3",
-      icon: <InboxIcon/>,
-      onClick: () => history.push('/')
+      text: "Escanear QR",
+      icon: <InboxIcon />,
+      onClick: () => history.push("/dashboard/scanQR"),
     },
     {
-      text: "Menu4",
-      icon: <InboxIcon/>,
-      onClick: () => history.push('/')
+      text: "Solicitudes Pendientes",
+      icon: <InboxIcon />,
+      onClick: () => history.push("/dashboard/awaitingRequest"),
     },
     {
-      text: "Menu5",
-      icon: <InboxIcon/>,
-      onClick: () => history.push('/')
+      text: "Registrar salida",
+      icon: <InboxIcon />,
+      onClick: () => history.push("/dashboard/registerExit"),
+    },
+  ];
+  const mobileMenuItems = [
+    {
+      text: "Idioma",
+      icon: <InboxIcon />,
+      onClick: () => history.push("/dashboard/manualInput"),
     },
     {
-      text: "Menu6",
-      icon: <InboxIcon/>,
-      onClick: () => history.push('/')
+      text: "Cerrar Sesion",
+      icon: <InboxIcon />,
+      onClick: () => history.push("/dashboard/manualInput"),
     },
-  ]
+  ];
+
   return (
-    <nav className={classes.drawer} aria-label="mailbox folders">
-      (/**Mobile */)
+    <div aria-label="mailbox folders">
       <Hidden smUp implementation="css">
         <Drawer
           container={container}
@@ -71,10 +79,9 @@ const NavigationDrawer = ({
             keepMounted: true,
           }}
         >
-          <Menu items={menuItems}/>
+          <Menu items={mobileMenuItems} />
         </Drawer>
       </Hidden>
-      (/**Desktop */)
       <Hidden xsDown implementation="css">
         <Drawer
           classes={{
@@ -83,10 +90,13 @@ const NavigationDrawer = ({
           variant="permanent"
           open
         >
-          <Menu items={menuItems}/>
+          <Menu items={desktopMenuItems} />
+          <Box className={classes.mobilemenu}>
+            <Menu items={mobileMenuItems} />
+          </Box>
         </Drawer>
       </Hidden>
-    </nav>
+    </div>
   );
 };
 

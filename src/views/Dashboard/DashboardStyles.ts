@@ -10,9 +10,6 @@ export const useStyles = makeStyles((theme: Theme) =>
     drawerPaper: {
       width: drawerWidth,
     },
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing(3),
-    },
+    
   })
 );

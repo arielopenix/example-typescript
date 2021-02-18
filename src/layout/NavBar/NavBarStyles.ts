@@ -1,6 +1,5 @@
-import { pink } from '@material-ui/core/colors';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-const drawerWidth = 240;
+const drawerWidth = 253;
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
