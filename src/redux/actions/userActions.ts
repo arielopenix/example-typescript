@@ -1,4 +1,4 @@
-import { HttpRequest } from "../../passapp-sdk/utils/HttpRequest";
+import { HttpRequest } from "../../passapp-sdk/utils/httpRequest";
 import { User, usersTypes } from "./types/userTypes";
 //import axios from 'axios'
 
