@@ -1,0 +1,9 @@
+{
+    "login.input.email.placeholder":"Correo",
+    "login.input.email.error":"Formato de correo incorrecto",
+    "login.input.password.placeholder":"Contraseña",
+    "login.input.password.error":"La contrasena debe tener almenos 8 caracteres",
+    "login.button.login":"Ingresar",
+    "login.button.contact":"Contactar con el Administrador",
+    "login.label.forgotpass":"¿Te olvidaste la contraseña?"
+}

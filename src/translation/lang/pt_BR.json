@@ -1,0 +1,9 @@
+{
+    "login.input.email.placeholder":"Email",
+    "login.input.email.error":"Formato de email errado",
+    "login.input.password.placeholder":"Senha",
+    "login.input.password.error":"A senha deve ter pelo menos 8 caracteres",
+    "login.button.login":"Login",
+    "login.button.contact":"Contactar con el Administrador",
+    "login.label.forgotpass":"Esqueceu sua senha?"
+}

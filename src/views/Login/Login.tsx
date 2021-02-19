@@ -17,8 +17,9 @@ import {
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../utils/validations/LoginValidationSquema";
+import { useTranslation } from "react-i18next"
+import {BundleKey} from '../../translation/bundleKey'
 import { useHistory } from "react-router-dom";
-//import { useTranslation } from "react-i18next"
 
 
 const Login = () => {
@@ -74,7 +75,7 @@ const Login = () => {
               <TextFieldOutlined
                 name="email"
                 type="text"
-                label="Email"
+                label={t(BundleKey.LOGIN_INPUT_EMAIL_PLACEHOLDER)}
                 value={email}
                 inputref={register}
                 onchange={(e: React.FormEvent) => handleChange(e, "email")}
@@ -83,7 +84,7 @@ const Login = () => {
               <TextFieldOutlined
                 name="password"
                 type="password"
-                label="Password"
+                label={t(BundleKey.LOGIN_INPUT_PASSWORD_PLACEHOLDER)}
                 value={password}
                 inputref={register}
                 onchange={(e: any) =>
@@ -97,16 +98,16 @@ const Login = () => {
               <p className={classes.error}>{errors.password?.message}</p>
               <p className={classes.error}>{error}</p>
               <SubmitButton
-                value="INGRESAR"
+                value={t(BundleKey.LOGIN_BUTTON_LOGIN)}
                 colorbutton="primary"
                 classname="submit"
                 disabled={false}
               />
               <Grid container justify="center" alignItems="center">
                 <Grid item>
-                  <p>¿Te olvidaste la contraseña?</p>
+                  <p>{t(BundleKey.LOGIN_LABEL_FORGOTPASS)}</p>
                   <Link href="#" variant="body2">
-                    Contactar con el Administrador
+                    {t(BundleKey.LOGIN_BUTTON_CONTACT)}
                   </Link>
                 </Grid>
               </Grid>
