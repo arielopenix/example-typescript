@@ -26,7 +26,7 @@ const Login = () => {
   const classes = useStyles();
   const history = useHistory();
   //const auth = new Auth();
-  //const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [state, dispatch] = useReducer(loginReducer, loginInitialState);
   const { email, password, error } = state;
   const { register, handleSubmit, errors } = useForm({
@@ -61,9 +61,9 @@ const Login = () => {
 
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container style={{height:'100vh',display:'flex',alignItems:'center',justifyContent:'center'}} component="main" maxWidth="xs">
       <CssBaseline />
-      <Card variant="outlined">
+      <Card variant="outlined" style={{width:'100%'}}>
         <CardContent>
           <div className={classes.paper}>
             <img alt="Web Logo" className="logo" src={logo} />
