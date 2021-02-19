@@ -1,42 +1,31 @@
+import React from 'react'
 import { useStyles } from "./ScanDocumentStyles";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
+import document from "../../assets/img/document.png";
 
 const ScanDocument = () => {
   const classes = useStyles();
   return (
-    <Container className={classes.container} component="main" >
-  
-      <Grid
-        container
-        spacing={3}
-        direction="column"
-        justify="center"
-        alignItems="center"
-      >
-        <Grid item xs={4}>
-          <h1>Escanear Documento</h1>
-          <div className={classes.two}></div>
-          <div className={classes.one}></div>
-          <div className={classes.three}></div>
-          <div className={classes.four}></div>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Grid container>
+          <Grid item xs={12} sm={12}>
+              <h1>Escanear Documento</h1>
+              <img alt="Scan Document" className={classes.document} src={document} />
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid
-        container
-        spacing={4}
-        direction="row"
-        justify="center"
-        alignItems="center"
-      >
-        <Button variant="contained" color="primary">
-          Sacar Foto
-        </Button>
-        <Button variant="contained" color="primary">
-          Documento
-        </Button>
-      </Grid>
+
+        <Grid container justify="flex-end">
+          <Grid item></Grid>
+        </Grid>
+      </div>
+      <Box mt={5}>
+
+      </Box>
     </Container>
   );
 };

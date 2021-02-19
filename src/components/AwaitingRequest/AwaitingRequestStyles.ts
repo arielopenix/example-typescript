@@ -5,9 +5,6 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(10),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
-  document: {
-    height: "200px"
-  }
 }));

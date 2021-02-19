@@ -8,6 +8,12 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import { useTheme } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import Box from "@material-ui/core/Box/Box";
+import MenuOptions from '../../components/MenuOptions/MenuOptions';
+import KeyboardIcon from '@material-ui/icons/Keyboard';
+import SettingsOverscanIcon from '@material-ui/icons/SettingsOverscan';
+import CropFreeIcon from '@material-ui/icons/CropFree';
+import PanToolIcon from '@material-ui/icons/PanTool';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 type NavigationDrawerProps = {
   container: any;
@@ -26,39 +32,39 @@ const NavigationDrawer = ({
   const desktopMenuItems = [
     {
       text: "Ingreso Manual",
-      icon: <InboxIcon />,
+      icon: <KeyboardIcon className={classes.icon}/>,
       onClick: () => history.push("/dashboard/manualInput"),
     },
     {
       text: "Escanear Documento",
-      icon: <InboxIcon />,
+      icon: <SettingsOverscanIcon className={classes.icon}/>,
       onClick: () => history.push("/dashboard/scanDocument"),
     },
     {
       text: "Escanear QR",
-      icon: <InboxIcon />,
+      icon: <CropFreeIcon className={classes.icon}/>,
       onClick: () => history.push("/dashboard/scanQR"),
     },
     {
       text: "Solicitudes Pendientes",
-      icon: <InboxIcon />,
+      icon: <PanToolIcon className={classes.icon}/>,
       onClick: () => history.push("/dashboard/awaitingRequest"),
     },
     {
       text: "Registrar salida",
-      icon: <InboxIcon />,
+      icon: <ExitToAppIcon className={classes.icon}/>,
       onClick: () => history.push("/dashboard/registerExit"),
     },
   ];
   const mobileMenuItems = [
     {
       text: "Idioma",
-      icon: <InboxIcon />,
+      icon: <InboxIcon className={classes.icon}/>,
       onClick: () => history.push("/dashboard/manualInput"),
     },
     {
       text: "Cerrar Sesion",
-      icon: <InboxIcon />,
+      icon: <InboxIcon className={classes.icon}/>,
       onClick: () => history.push("/dashboard/manualInput"),
     },
   ];
@@ -92,7 +98,7 @@ const NavigationDrawer = ({
         >
           <Menu items={desktopMenuItems} />
           <Box className={classes.mobilemenu}>
-            <Menu items={mobileMenuItems} />
+            <MenuOptions/>
           </Box>
         </Drawer>
       </Hidden>

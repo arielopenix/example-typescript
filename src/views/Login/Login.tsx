@@ -17,11 +17,13 @@ import {
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../utils/validations/LoginValidationSquema";
+import { useHistory } from "react-router-dom";
 //import { useTranslation } from "react-i18next"
 
 
 const Login = () => {
   const classes = useStyles();
+  const history = useHistory();
   //const auth = new Auth();
   //const { t, i18n } = useTranslation();
   const [state, dispatch] = useReducer(loginReducer, loginInitialState);
@@ -35,6 +37,7 @@ const Login = () => {
     dispatch({ type: LoginActionType.LOGIN });
     try {
       console.log(`Email: ${email} Password: ${password}`);
+      history.replace("/dashboard");
       //await auth.login(email, password);
       dispatch({ type: LoginActionType.LOGIN_SUCCESS });
       //redirecciono al menu

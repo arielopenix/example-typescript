@@ -7,7 +7,4 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center"
   },
-  document: {
-    height: "200px"
-  }
 }));

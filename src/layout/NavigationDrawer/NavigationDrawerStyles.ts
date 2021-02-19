@@ -10,6 +10,11 @@ export const useStyles = makeStyles((theme: Theme) =>
       },
       
     },
+    icon: {
+      height: "17px",
+      weight: "17px",
+      color: "#FFFFFF"
+    },
     drawerPaper: {
       width: drawerWidth,
       backgroundColor: "#272643"
