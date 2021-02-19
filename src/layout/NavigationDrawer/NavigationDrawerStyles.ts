@@ -10,6 +10,11 @@ export const useStyles = makeStyles((theme: Theme) =>
       },
       
     },
+    icon: {
+      height: "17px",
+      weight: "17px",
+      color: "#FFFFFF"
+    },
     drawerPaper: {
       width: drawerWidth,
       backgroundColor: "#272643"
@@ -18,6 +23,10 @@ export const useStyles = makeStyles((theme: Theme) =>
       position: "absolute",
       height: "100px",
       
+    },
+    mobilemenu: {
+      position: "absolute",
+      bottom: "0px"
     }
   })
 );

@@ -19,12 +19,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../utils/validations/LoginValidationSquema";
 import { useTranslation } from "react-i18next"
 import {BundleKey} from '../../translation/bundleKey'
+import { useHistory } from "react-router-dom";
 
 
 const Login = () => {
   const classes = useStyles();
+  const history = useHistory();
   //const auth = new Auth();
-  const { t, i18n } = useTranslation();
+  //const { t, i18n } = useTranslation();
   const [state, dispatch] = useReducer(loginReducer, loginInitialState);
   const { email, password, error } = state;
   const { register, handleSubmit, errors } = useForm({
@@ -36,6 +38,7 @@ const Login = () => {
     dispatch({ type: LoginActionType.LOGIN });
     try {
       console.log(`Email: ${email} Password: ${password}`);
+      history.replace("/dashboard");
       //await auth.login(email, password);
       dispatch({ type: LoginActionType.LOGIN_SUCCESS });
       //redirecciono al menu
@@ -51,10 +54,10 @@ const Login = () => {
       payload: e.currentTarget.value,
     });
   };
-  //onChangeLanguaje
+  /**onChangeLanguaje
   const onChangeLanguaje = () => {
     i18n.changeLanguage();
-  }
+  }*/
 
 
   return (

@@ -4,6 +4,7 @@ import { useStyles } from "./DashboardStyles";
 import NavBar from "../../layout/NavBar/NavBar";
 import NavigationDrawer from "../../layout/NavigationDrawer/NavigationDrawer";
 import { BrowserRouter as Router } from "react-router-dom";
+import Main from "../Main/Main";
 
 interface Props {
   window?: () => Window;
@@ -24,19 +25,14 @@ const Dashboard = (props: Props) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      (/**Barra de Navegacion**/)
       <NavBar onclick={handleDrawerToggle} />
-      (/**Menu Lateral**/)
       <Router>
         <NavigationDrawer
           container={container}
           onclose={handleDrawerToggle}
           open={mobileOpen}
         />
-        (/**Seccion principal**/)
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-        </main>
+        <Main />
       </Router>
     </div>
   );

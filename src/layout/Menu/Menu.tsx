@@ -4,6 +4,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import React from "react";
 import ListItemText from "@material-ui/core/ListItemText";
 import { useStyles } from "./MenuStyles";
+import logo from "../../assets/img/logo.png";
+
 
 type menuProps = {
   items: any[];
@@ -11,10 +13,13 @@ type menuProps = {
 
 const Menu = ({ items }: menuProps) => {
   const classes = useStyles();
+  console.log(items);
   return (
     <>
       <div>
-        <div className={classes.toolbar} />
+        <div className={classes.toolbar} >
+          <img alt="Web Logo" className={classes.logo} src={logo} />
+        </div>
         <List>
           {items.map((item, index) => {
             const { text, icon, onClick } = item;

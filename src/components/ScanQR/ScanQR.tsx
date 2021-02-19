@@ -1,11 +1,33 @@
-import React from 'react'
+import React from "react";
+import { useStyles } from "./ScanQRStyles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import Container from "@material-ui/core/Container";
+import qr from "../../assets/img/qr.png";
 
 const ScanQR = () => {
-    return (
-        <div>
-            <h1>Scan QR</h1>
-        </div>
-    )
-}
+  const classes = useStyles();
+  return (
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Grid container>
+          <Grid item xs={12} sm={12}>
+              <h1>Escanear QR</h1>
+              <img alt="Scan QR" className="qr" src={qr} />
+          </Grid>
+        </Grid>
 
-export default ScanQR
+        <Grid container justify="flex-end">
+          <Grid item></Grid>
+        </Grid>
+      </div>
+      <Box mt={5}>
+
+      </Box>
+    </Container>
+  );
+};
+
+export default ScanQR;

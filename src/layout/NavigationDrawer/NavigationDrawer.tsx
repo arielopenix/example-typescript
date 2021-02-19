@@ -7,6 +7,13 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 //import logo from "../../assets/img/logo.png";
 import { useTheme } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
+import Box from "@material-ui/core/Box/Box";
+import MenuOptions from '../../components/MenuOptions/MenuOptions';
+import KeyboardIcon from '@material-ui/icons/Keyboard';
+import SettingsOverscanIcon from '@material-ui/icons/SettingsOverscan';
+import CropFreeIcon from '@material-ui/icons/CropFree';
+import PanToolIcon from '@material-ui/icons/PanTool';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 type NavigationDrawerProps = {
   container: any;
@@ -22,41 +29,48 @@ const NavigationDrawer = ({
   const classes = useStyles();
   const theme = useTheme();
   const history = useHistory();
-  const menuItems = [
+  const desktopMenuItems = [
     {
-      text: "Menu1",
-      icon: <InboxIcon/>,
-      onClick: () => history.push('/')
+      text: "Ingreso Manual",
+      icon: <KeyboardIcon className={classes.icon}/>,
+      onClick: () => history.push("/dashboard/manualInput"),
     },
     {
-      text: "Menu2",
-      icon: <InboxIcon/>,
-      onClick: () => history.push('/')
+      text: "Escanear Documento",
+      icon: <SettingsOverscanIcon className={classes.icon}/>,
+      onClick: () => history.push("/dashboard/scanDocument"),
     },
     {
-      text: "Menu3",
-      icon: <InboxIcon/>,
-      onClick: () => history.push('/')
+      text: "Escanear QR",
+      icon: <CropFreeIcon className={classes.icon}/>,
+      onClick: () => history.push("/dashboard/scanQR"),
     },
     {
-      text: "Menu4",
-      icon: <InboxIcon/>,
-      onClick: () => history.push('/')
+      text: "Solicitudes Pendientes",
+      icon: <PanToolIcon className={classes.icon}/>,
+      onClick: () => history.push("/dashboard/awaitingRequest"),
     },
     {
-      text: "Menu5",
-      icon: <InboxIcon/>,
-      onClick: () => history.push('/')
+      text: "Registrar salida",
+      icon: <ExitToAppIcon className={classes.icon}/>,
+      onClick: () => history.push("/dashboard/registerExit"),
+    },
+  ];
+  const mobileMenuItems = [
+    {
+      text: "Idioma",
+      icon: <InboxIcon className={classes.icon}/>,
+      onClick: () => history.push("/dashboard/manualInput"),
     },
     {
-      text: "Menu6",
-      icon: <InboxIcon/>,
-      onClick: () => history.push('/')
+      text: "Cerrar Sesion",
+      icon: <InboxIcon className={classes.icon}/>,
+      onClick: () => history.push("/dashboard/manualInput"),
     },
-  ]
+  ];
+
   return (
-    <nav className={classes.drawer} aria-label="mailbox folders">
-      (/**Mobile */)
+    <div aria-label="mailbox folders">
       <Hidden smUp implementation="css">
         <Drawer
           container={container}
@@ -71,10 +85,9 @@ const NavigationDrawer = ({
             keepMounted: true,
           }}
         >
-          <Menu items={menuItems}/>
+          <Menu items={mobileMenuItems} />
         </Drawer>
       </Hidden>
-      (/**Desktop */)
       <Hidden xsDown implementation="css">
         <Drawer
           classes={{
@@ -83,10 +96,13 @@ const NavigationDrawer = ({
           variant="permanent"
           open
         >
-          <Menu items={menuItems}/>
+          <Menu items={desktopMenuItems} />
+          <Box className={classes.mobilemenu}>
+            <MenuOptions/>
+          </Box>
         </Drawer>
       </Hidden>
-    </nav>
+    </div>
   );
 };
 
