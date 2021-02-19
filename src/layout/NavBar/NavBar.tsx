@@ -53,7 +53,7 @@ const NavBar = ({ onclick }: NavbarProps) => {
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <IconButton
             color="primary"
             aria-label="open drawer"

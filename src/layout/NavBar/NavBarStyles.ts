@@ -34,6 +34,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingTop: "0px",
     paddingBottom: "0px",
   },
+  toolbar:{
+    display: 'inline-grid',
+    justifyContent: 'right'
+  },
 }));
 
 export default useStyles;
