@@ -1,0 +1,9 @@
+{
+    "login.input.email.placeholder":"Email",
+    "login.input.email.error":"Wrong email format",
+    "login.input.password.placeholder":"Password",
+    "login.input.password.error":"The password must be at least 8 characters long",
+    "login.button.login":"Login",
+    "login.button.contact":"Contact the Administrator",
+    "login.label.forgotpass":"Forgot your password?"
+}

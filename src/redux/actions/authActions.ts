@@ -1,5 +1,5 @@
 import { Authentication, AuthActionType, AuthAction } from "./types/authTypes";
-import Auth from "../../passapp-sdk/Auth";
+import Auth from "../../passapp-sdk/auth";
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "../reducers/rootReducer";
 import { Action } from "redux";

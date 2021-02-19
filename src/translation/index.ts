@@ -1,8 +1,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import enTranslation from "./en.json";
-import esTranslation from "./es.json";
-import poTranslation from "./po.json";
+import enTranslation from "./lang/en_US.json";
+import esTranslation from "./lang/es_ES.json";
+import poTranslation from "./lang/pt_BR.json";
 
 const resources = {
   en: {
@@ -17,7 +17,7 @@ const resources = {
 };
 i18n.use(initReactI18next).init({
   resources,
-  lng: "es",
+  lng: "en",
   keySeparator: false,
   interpolation: {
     escapeValue: false,
