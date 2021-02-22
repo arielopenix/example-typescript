@@ -24,8 +24,15 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { MenuItem } from '@material-ui/core';
+import { connect } from "react-redux";
+import { translateTypes } from "../../redux/actions/types/translateTypes";
 
-const Login = () => {
+type LoginProps = {
+  state:any,
+  changeLanguage: any
+}
+
+const Login = (props:LoginProps) => {
   const classes = useStyles();
   const history = useHistory();
   //const auth = new Auth();
@@ -59,12 +66,12 @@ const Login = () => {
     });
   };
  
-  const onChangeLanguaje = (event: any) => {
-    console.log(event.target.value);
-    console.log(event);
-    i18n.changeLanguage(event.target.value);
-    console.log(event.target.value);
-  }
+  // const onChangeLanguaje = (event: any) => {
+  //   console.log(event.target.value);
+  //   console.log(event);
+  //   i18n.changeLanguage(event.target.value);
+  //   console.log(event.target.value);
+  // }
 
   return (
     <>
@@ -73,8 +80,8 @@ const Login = () => {
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={languaje}
-          onChange={e => onChangeLanguaje(e)}
+          value={props.state.translate.lang}
+          onChange={e => props.changeLanguage(e.target.value)}
           label="Age"
         >
           <MenuItem value="">
@@ -153,4 +160,17 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state:any)=>({
+  state:state
+})
+
+const mapDispatchToProps = (dispatch:any)=>({
+    changeLanguage(lang:String){
+      dispatch({
+        type: translateTypes.TRANSLATE_CHANGE_LANGUAGE,
+        lang
+      })
+    }
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login);

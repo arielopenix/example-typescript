@@ -5,19 +5,19 @@ import esTranslation from "./lang/es_ES.json";
 import poTranslation from "./lang/pt_BR.json";
 
 const resources = {
-  en: {
+  en_US: {
     translation: enTranslation,
   },
-  es: {
+  es_ES: {
     translation: esTranslation,
   },
-  po: {
+  pt_BR: {
     translation: poTranslation,
   },
 };
 i18n.use(initReactI18next).init({
   resources,
-  lng: "en",
+  lng: "en_US",
   keySeparator: false,
   interpolation: {
     escapeValue: false,
