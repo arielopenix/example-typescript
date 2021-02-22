@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Login from "./views/Login/Login";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
@@ -12,6 +12,9 @@ import ScanDocument from "./components/ScanDocument/ScanDocument";
 import ScanQR from "./components/ScanQR/ScanQR";
 
 function App() {
+  useEffect(()=>{
+    console.log(process.env.REACT_APP_BASE_URL)
+  })
   return (
     <>
       <Container>

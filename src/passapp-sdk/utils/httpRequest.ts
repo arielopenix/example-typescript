@@ -72,7 +72,6 @@ export class HttpRequest {
   requestAll<T>(requestOptions: GenericRequest): Promise<T> {
     const { method, url, options } = requestOptions;
     return new Promise((resolve, reject) => {
-      //const configValue: string = (process.env.REACT_APP_BASE_URL as string);
       fetch(process.env.REACT_APP_BASE_URL + url, {
         method: method,
         body: JSON.stringify(options?.body),

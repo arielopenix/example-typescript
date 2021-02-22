@@ -9,6 +9,7 @@ import { store } from "./redux/store";
 import { BrowserRouter } from "react-router-dom";
 import {I18nextProvider} from 'react-i18next'
 import i18next from 'i18next'
+require('dotenv').config()
 
 ReactDOM.render(
   <React.StrictMode>

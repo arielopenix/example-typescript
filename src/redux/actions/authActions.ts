@@ -39,18 +39,15 @@ export const logout = (state: boolean): AuthAction => {
 export const login = (email: string, password: string, history: any) => {
   return (dispatch: any) => {
     dispatch(loginRequest);
-    auth
-      .login(email, password)
-      .then((response) => response.json())
-      .then((data) => {
-        const token = `Bearer ${data.token}`;
-        if (token) {
+    auth.login(email, password)
+      .then((response) => {
+        auth.getUser(response.token)
+        .then((user) => {
           dispatch(loginSuccess);
-          localStorage.setItem("token", `Bearer ${data.token}`);
-          console.log("login ok!");
-          history.push("/menu"); // redirecciono al menu
-        }
-        dispatch(loginFailure);
+          localStorage.setItem("user", user);
+          localStorage.setItem("token", response.token);
+          history.push("/dashboard");
+        });
       })
       .catch((err) => {
         console.log(`Error: ${err}`);
